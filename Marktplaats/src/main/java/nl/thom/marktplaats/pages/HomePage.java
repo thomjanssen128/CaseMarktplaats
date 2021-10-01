@@ -32,6 +32,8 @@ public class HomePage extends Page {
                         break;
                     case "3":
                         System.out.println("Reg");
+                        RegistrationPage rp = new RegistrationPage();
+                        rp.render();
                         break;
                     case "x":
                         System.out.println("Bye!");

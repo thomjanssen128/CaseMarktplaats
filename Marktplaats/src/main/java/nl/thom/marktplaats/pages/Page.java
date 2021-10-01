@@ -1,7 +1,7 @@
 package nl.thom.marktplaats.pages;
 
 import java.util.List;
-
+import static nl.thom.marktplaats.App.prompt;
 public class Page {
 
     public void render() {
@@ -22,7 +22,7 @@ public class Page {
         return getClass().getSimpleName();
     }
 
-    public void renderMenu(List items) {
+    public static void renderMenu(List items) {
         System.out.println(items.get(0));
         int i = 0;
 
