@@ -9,17 +9,6 @@ import static nl.thom.marktplaats.App.prompt;
 
 public class RegistrationPage extends Page {
 
-    // singleton design pattern begin -----------
-    // private static RegistrationPage self;
-    //
-    // private RegistrationPage() {}
-    //
-    // public static synchronized RegistrationPage registrationpage() {
-    //     if (self == null) self = new RegistrationPage();
-    //     return self;
-    // }
-    // singleton design pattern end -------------
-
     static List<String> options = Arrays.asList("We gaan registreren!", "Yes!", "Cancel");
 
     @Override
@@ -34,6 +23,7 @@ public class RegistrationPage extends Page {
                     RegistrationUser ru = new RegistrationUser();
                     System.out.println(ru.register(name, email));
 
+
                 case "x":
                     return;
                 default:
@@ -42,7 +32,7 @@ public class RegistrationPage extends Page {
 
             }
         } catch (Exception e) {
-
+            System.out.println(e.getMessage());
         }
 
     }
