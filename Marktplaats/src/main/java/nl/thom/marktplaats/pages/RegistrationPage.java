@@ -1,6 +1,7 @@
 package nl.thom.marktplaats.pages;
 
 import nl.thom.marktplaats.RegistrationUser;
+import nl.thom.marktplaats.util.PasswordGenerator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.List;
 import static nl.thom.marktplaats.App.prompt;
 
 public class RegistrationPage extends Page {
+
+    private RegistrationUser registrationUser = new RegistrationUser();
 
     static List<String> options = Arrays.asList("We gaan registreren!", "Yes!", "Cancel");
 
@@ -20,8 +23,8 @@ public class RegistrationPage extends Page {
                 case "1":
                     String name = prompt("Name:  ");
                     String email = prompt("Email: ");
-                    RegistrationUser ru = new RegistrationUser();
-                    System.out.println(ru.register(name, email));
+                    String password = new PasswordGenerator().generator();
+                    registrationUser.register(name, email, password);
 
 
                 case "x":

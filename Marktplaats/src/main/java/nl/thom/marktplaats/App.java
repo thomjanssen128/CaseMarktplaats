@@ -1,16 +1,19 @@
 package nl.thom.marktplaats;
 
 import nl.thom.marktplaats.pages.HomePage;
-import nl.thom.marktplaats.util.PasswordGenerator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
+    private static final Logger LOG = LoggerFactory.getLogger(App.class);
     static List<User> users = new ArrayList<>();
 
     private static final Scanner scanner = new Scanner(System.in);
+
 
     public static String readLine() {
         return scanner.nextLine();
@@ -21,10 +24,12 @@ public class App {
     }
 
     public static void main(String[] args) {
-        // HomePage homepage = new HomePage();
-        // homepage.render();
-        PasswordGenerator p = new PasswordGenerator();
-        System.out.println(p.generator());
+        HomePage homepage = new HomePage();
+        homepage.render();
+        // PasswordGenerator p = new PasswordGenerator();
+        // System.out.println(p.generator());
 
     }
+
+
 }

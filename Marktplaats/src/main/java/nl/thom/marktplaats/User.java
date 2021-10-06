@@ -1,18 +1,19 @@
 package nl.thom.marktplaats;
 
+
 public class User {
-    String name;
+    public String name;
     String email;
     String password;
 
-    public User(String name, String email) {
+    public User(String name, String email, String password) {
         this.name = name;
         this.email = email;
-        this.password = "";
+        this.password = password;
     }
 
     @Override
     public String toString() {
-        return "User: " + name + " @ " + email;
+        return "User: " + name + ", " + email + ", " + password;
     }
 }
