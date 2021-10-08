@@ -1,20 +1,20 @@
 package nl.thom.marktplaats;
 
-import nl.thom.marktplaats.daos.UserDao;
+import nl.thom.marktplaats.daos.GebruikerDao;
 
 public class RegistrationUser {
 
-    private UserDao dao = new UserDao();
+    private GebruikerDao dao = new GebruikerDao();
 
     public RegistrationUser() { }
 
     public void register(String name, String email, String password) {
-        User user = new User(name, email, password);
-        App.users.add(user); // moet dit?
+        Gebruiker user = new Gebruiker(name, email, password);
+        App.gebruikers.add(user); // moet dit?
         save(dao, user);
     }
 
-    public void save(UserDao dao, User user) {
+    public void save(GebruikerDao dao, Gebruiker user) {
         dao.save(user);
     }
 }

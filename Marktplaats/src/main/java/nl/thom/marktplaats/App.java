@@ -1,37 +1,39 @@
 package nl.thom.marktplaats;
 
 import nl.thom.marktplaats.pages.HomePage;
-// import org.slf4j.Logger;
-// import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    // private static final Logger LOG = LoggerFactory.getLogger(App.class);
-    static List<User> users = new ArrayList<>();
+    static List<Gebruiker> gebruikers = new ArrayList<>();
 
     private static final Scanner scanner = new Scanner(System.in);
 
     public static String readLine() {
         return scanner.nextLine();
     }
-    public static String prompt(String message){
+
+    public static String prompt(String message) {
         System.out.print(message);
         return scanner.nextLine();
     }
 
     public static void main(String[] args) {
-        addUsers();
+        addGebruikers();
         HomePage homepage = new HomePage();
         homepage.render();
 
     }
 
-    private static void addUsers() {
-        User u = new User("Thom", "q", "1234");
-        users.add(u);
+    // only here for quick tests
+    // remove from production
+    private static void addGebruikers() {
+        Gebruiker u = new Gebruiker("Thom", "q", "1234");
+        Gebruiker o = new Gebruiker("Ollie", "1", "miauw");
+        gebruikers.add(u);
+        gebruikers.add(o);
     }
 
 

@@ -1,12 +1,16 @@
 package nl.thom.marktplaats;
 
 
-public class User {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Gebruiker {
     public String name;
     String email;
     String password;
+    public List<Advertentie> advertenties = new ArrayList();
 
-    public User(String name, String email, String password) {
+    public Gebruiker(String name, String email, String password) {
         this.name = name;
         this.email = email;
         this.password = password;

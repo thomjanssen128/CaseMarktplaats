@@ -6,13 +6,13 @@ import nl.thom.marktplaats.pages.HomePage;
 
 import java.util.List;
 
-public class LoginUser {
+public class LoginGebruiker {
     // private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
-    private User user;
-    private User nullUser = new User(null, null, null);
+    private Gebruiker user;
+    private Gebruiker nullUser = new Gebruiker(null, null, null);
 
-    static List<User> users = App.users;
+    static List<Gebruiker> users = App.gebruikers;
 
 
     //
@@ -20,7 +20,7 @@ public class LoginUser {
     //     this.user = user;
     // }
 
-    private void login(User user) {
+    private void login(Gebruiker gebruiker) {
         HomePage.currentUser = user;
     }
 
@@ -33,8 +33,8 @@ public class LoginUser {
         }
     }
 
-    public User getUser(String name, String password) {
-        for (User user : users) {
+    public Gebruiker getUser(String name, String password) {
+        for (Gebruiker user : users) {
             System.out.println(user.name + " " + user.password);
             if (user.name.equals(name) && user.password.equals(password)) {
                 return user;

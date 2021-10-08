@@ -1,7 +1,7 @@
 package nl.thom.marktplaats.pages;
 
 import nl.thom.marktplaats.Backdoor;
-import nl.thom.marktplaats.User;
+import nl.thom.marktplaats.Gebruiker;
 
 import java.util.Arrays;
 import java.util.List;
@@ -11,9 +11,13 @@ import static nl.thom.marktplaats.App.prompt;
 public class HomePage extends Page {
 
 
+    private final AddAdPage addAdPage;
     private final RegistrationPage registrationPage;
     private final InlogPage inlogPage;
-    public static User currentUser = null;
+    private final ShowAdvertenties showAdvertenties;
+
+
+    public static Gebruiker currentUser = null;
     private boolean running = true;
 
     List<String> options1 = Arrays.asList(
@@ -32,6 +36,8 @@ public class HomePage extends Page {
     public HomePage() {
         this.registrationPage = new RegistrationPage();
         this.inlogPage = new InlogPage();
+        this.addAdPage = new AddAdPage();
+        this.showAdvertenties = new ShowAdvertenties();
         this.currentUser = null;
     }
 
@@ -89,11 +95,11 @@ public class HomePage extends Page {
                     break;
                 case "2":
                     System.out.println("Advertentie plaatsen");
-                    //registrationPage.render();
+                    addAdPage.render();
                     break;
                 case "3":
                     System.out.println("Advertentie bekijken");
-                    //registrationPage.render();
+                    showAdvertenties.show(currentUser.advertenties);
                     break;
                 case "4":
                     System.out.println("Uitloggen");

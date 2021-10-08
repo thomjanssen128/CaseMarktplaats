@@ -1,7 +1,7 @@
 package nl.thom.marktplaats.pages;
 
 import nl.thom.marktplaats.Backdoor;
-import nl.thom.marktplaats.LoginUser;
+import nl.thom.marktplaats.LoginGebruiker;
 
 import java.util.Arrays;
 import java.util.List;
@@ -9,10 +9,10 @@ import java.util.List;
 import static nl.thom.marktplaats.App.prompt;
 
 public class InlogPage extends Page {
-    private LoginUser loginUser;
+    private LoginGebruiker loginUser;
 
     InlogPage() {
-        loginUser = new LoginUser();
+        loginUser = new LoginGebruiker();
     }
 
     static List<String> options = Arrays.asList("Wil je inloggen?", "Ja", "Nee");

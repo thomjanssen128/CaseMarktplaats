@@ -14,7 +14,9 @@ public class PasswordGenerator {
             password += r.ints(minChar, maxChar)
                     .filter(j -> (j <= 57 || j >= 65) && (j <= 90 || j >= 97))
                     .limit(1)
-                    .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+                    .collect(StringBuilder::new,
+                            StringBuilder::appendCodePoint,
+                            StringBuilder::append)
                     .toString();
         }
 
