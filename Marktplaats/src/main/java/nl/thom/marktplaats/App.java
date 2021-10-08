@@ -14,7 +14,6 @@ public class App {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-
     public static String readLine() {
         return scanner.nextLine();
     }
@@ -26,8 +25,6 @@ public class App {
     public static void main(String[] args) {
         HomePage homepage = new HomePage();
         homepage.render();
-        // PasswordGenerator p = new PasswordGenerator();
-        // System.out.println(p.generator());
 
     }
 

@@ -8,28 +8,26 @@ import java.util.List;
 import static nl.thom.marktplaats.App.prompt;
 
 public class InlogPage extends Page{
-
     private LoginUser loginUser;
     InlogPage() {
         loginUser = new LoginUser();
     }
-    static List<String> options = Arrays.asList("Inloggen!", "Yes!", "Cancel");
+    static List<String> options = Arrays.asList("Wil je inloggen?", "Ja", "Nee");
     @Override
     public void render() {
         header();
         renderMenu(options);
         try {
-            switch (prompt("Doen? ")) {
+            switch (prompt(MAAKKEUZE)) {
                 case "1":
-                    String name = prompt("Username:  ");
-                    String password = prompt("Password: ");
+                    String name = prompt("Gebruikersnaam: ");
+                    String password = prompt("Wachtwoord: ");
                     loginUser.validateCredentials(name, password);
 
 
                 case "x":
                     return;
                 default:
-                    System.out.println("default");
                     break;
 
             }

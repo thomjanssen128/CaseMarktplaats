@@ -1,8 +1,8 @@
 package nl.thom.marktplaats.pages;
 
 import java.util.List;
-import static nl.thom.marktplaats.App.prompt;
 public class Page {
+    public final String MAAKKEUZE = "Maak een keuze: ";
 
     public void render() {
         header();
@@ -31,6 +31,7 @@ public class Page {
             System.out.printf("[%s] %s\n", i == items.size()-1 ? "x" : i, item);
         }
         System.out.println("");
+
 
     }
 }

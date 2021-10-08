@@ -1,5 +1,6 @@
 package nl.thom.marktplaats.pages;
 
+import nl.thom.marktplaats.Backdoor;
 import nl.thom.marktplaats.User;
 
 import java.util.Arrays;
@@ -9,6 +10,7 @@ import static nl.thom.marktplaats.App.prompt;
 
 public class HomePage extends Page {
 
+
     private final RegistrationPage registrationPage;
     private final InlogPage inlogPage;
     public static User currentUser;
@@ -16,15 +18,14 @@ public class HomePage extends Page {
     List<String> options1 = Arrays.asList(
             "Welkom bij Marktplaats wat wil je doen?",
             "Inloggen",
-            "Advertentie plaatsen",
             "Registreren",
-            "Exit");
+            "Stoppen");
     List<String> options2 = Arrays.asList(
             "Welkom bij Marktplaats wat wil je doen?",
             "Uitloggen",
             "Advertentie plaatsen",
             "Mijn advertenties bekijken",
-            "Exit");
+            "Stoppen");
 
     public HomePage() {
         this.registrationPage = new RegistrationPage();
@@ -36,43 +37,71 @@ public class HomePage extends Page {
     public void render() {
         while (true) {
             header();
-            if (currentUser==  null) {
+            if (currentUser == null) {
                 renderMenu(options1);
+                promptNoLogin();
             } else {
                 renderMenu(options2);
+                promptWithLogin();
             }
+            System.out.println("");
 
-            try {
-                switch (prompt("Maak keuze: ")) {
-                    case "1":
-                        System.out.println("Inloggen");
-                        inlogPage.render();
-                        break;
-
-
-
-
-                    case "2":
-                        System.out.println("AdPl");
-                        break;
-                    case "3":
-                        System.out.println("Reg");
-                        registrationPage.render();
-                        break;
-                    case "x":
-                        System.out.println("Bye!");
-                        return;
-                    default:
-                        System.out.println("Choose an option!");
-                        break;
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
         }
     }
 
+    public void promptNoLogin() {
+        try {
+            switch (prompt(MAAKKEUZE)) {
+                case "1":
+                    inlogPage.render();
+                    break;
+                case "2":
+                    registrationPage.render();
+                    break;
+                case "x":
+                    System.out.println("tot ziens!");
+                    return;
+                case "?":
+                    Backdoor.open();
+                    break;
+                default:
+                    System.out.println(MAAKKEUZE);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void promptWithLogin() {
+        try {
+            switch (prompt(MAAKKEUZE)) {
+                case "1":
+                    System.out.println("Uitloggen");
+                    currentUser = null;
+                    break;
+                case "2":
+                    System.out.println("Advertentie plaatsen");
+                    //registrationPage.render();
+                    break;
+                case "3":
+                    System.out.println("Advertentie bekijken");
+                    //registrationPage.render();
+                    break;
+                case "x":
+                    System.out.println("Tot ziens!");
+                    return;
+                case "?":
+                    Backdoor.open();
+                default:
+                    System.out.println(MAAKKEUZE);
+                    break;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
 
 
