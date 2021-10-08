@@ -1,6 +1,5 @@
 package nl.thom.marktplaats;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Backdoor {
@@ -8,7 +7,7 @@ public class Backdoor {
 
     public static void open() {
         for (User user : users) {
-            System.out.println(user);
+            System.out.println("\033[31m" + user + "\033[0m");
         }
     }
 

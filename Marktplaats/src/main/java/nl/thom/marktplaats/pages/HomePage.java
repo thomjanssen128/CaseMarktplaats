@@ -14,6 +14,7 @@ public class HomePage extends Page {
     private final RegistrationPage registrationPage;
     private final InlogPage inlogPage;
     public static User currentUser;
+    private boolean running = true;
 
     List<String> options1 = Arrays.asList(
             "Welkom bij Marktplaats wat wil je doen?",
@@ -35,7 +36,7 @@ public class HomePage extends Page {
 
     @Override
     public void render() {
-        while (true) {
+        while (running) {
             header();
             if (currentUser == null) {
                 renderMenu(options1);
@@ -60,7 +61,8 @@ public class HomePage extends Page {
                     registrationPage.render();
                     break;
                 case "x":
-                    System.out.println("tot ziens!");
+                    System.out.println("Tot ziens!");
+                    running = false;
                     return;
                 case "?":
                     Backdoor.open();
@@ -91,6 +93,7 @@ public class HomePage extends Page {
                     break;
                 case "x":
                     System.out.println("Tot ziens!");
+                    running = false;
                     return;
                 case "?":
                     Backdoor.open();
