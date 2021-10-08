@@ -1,13 +1,13 @@
 package nl.thom.marktplaats;
 
 import nl.thom.marktplaats.pages.HomePage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
 public class LoginUser {
-    private static final Logger LOG = LoggerFactory.getLogger(App.class);
+    // private static final Logger LOG = LoggerFactory.getLogger(App.class);
 
     private User user;
     private User nullUser = new User(null, null, null);

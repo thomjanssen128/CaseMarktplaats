@@ -1,15 +1,15 @@
 package nl.thom.marktplaats;
 
 import nl.thom.marktplaats.pages.HomePage;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+// import org.slf4j.Logger;
+// import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class App {
-    private static final Logger LOG = LoggerFactory.getLogger(App.class);
+    // private static final Logger LOG = LoggerFactory.getLogger(App.class);
     static List<User> users = new ArrayList<>();
 
     private static final Scanner scanner = new Scanner(System.in);
@@ -23,9 +23,15 @@ public class App {
     }
 
     public static void main(String[] args) {
+        addUsers();
         HomePage homepage = new HomePage();
         homepage.render();
 
+    }
+
+    private static void addUsers() {
+        User u = new User("Thom", "q", "1234");
+        users.add(u);
     }
 
 

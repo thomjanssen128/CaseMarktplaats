@@ -13,7 +13,7 @@ public class HomePage extends Page {
 
     private final RegistrationPage registrationPage;
     private final InlogPage inlogPage;
-    public static User currentUser;
+    public static User currentUser = null;
     private boolean running = true;
 
     List<String> options1 = Arrays.asList(
@@ -22,10 +22,11 @@ public class HomePage extends Page {
             "Registreren",
             "Stoppen");
     List<String> options2 = Arrays.asList(
-            "Welkom bij Marktplaats wat wil je doen?",
-            "Uitloggen",
+            "Wat wil je doen?",
+            "Account aanpassen",
             "Advertentie plaatsen",
             "Mijn advertenties bekijken",
+            "Uitloggen",
             "Stoppen");
 
     public HomePage() {
@@ -37,7 +38,10 @@ public class HomePage extends Page {
     @Override
     public void render() {
         while (running) {
+            clearConsole();
             header();
+            System.out.println(currentUser == null?"":"\033[94m"+currentUser.name+"\033[0m");
+
             if (currentUser == null) {
                 renderMenu(options1);
                 promptNoLogin();
@@ -49,6 +53,7 @@ public class HomePage extends Page {
 
 
         }
+
     }
 
     public void promptNoLogin() {
@@ -80,8 +85,7 @@ public class HomePage extends Page {
         try {
             switch (prompt(MAAKKEUZE)) {
                 case "1":
-                    System.out.println("Uitloggen");
-                    currentUser = null;
+                    System.out.println("Account aanpassen");
                     break;
                 case "2":
                     System.out.println("Advertentie plaatsen");
@@ -90,6 +94,10 @@ public class HomePage extends Page {
                 case "3":
                     System.out.println("Advertentie bekijken");
                     //registrationPage.render();
+                    break;
+                case "4":
+                    System.out.println("Uitloggen");
+                    currentUser = null;
                     break;
                 case "x":
                     System.out.println("Tot ziens!");

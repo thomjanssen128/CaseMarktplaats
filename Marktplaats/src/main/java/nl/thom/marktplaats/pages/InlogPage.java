@@ -19,7 +19,9 @@ public class InlogPage extends Page {
 
     @Override
     public void render() {
+        clearConsole();
         header();
+        System.out.println();
         renderMenu(options);
         try {
             switch (prompt(MAAKKEUZE)) {
