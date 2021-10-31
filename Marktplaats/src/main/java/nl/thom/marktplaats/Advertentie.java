@@ -23,7 +23,7 @@ public class Advertentie {
             this.omschrijving = omschrijving;
             return this;
         }
-        public Builder prijs(double omschrijving) {
+        public Builder prijs(double prijs) {
             this.prijs = prijs;
             return this;
         }
