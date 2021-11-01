@@ -1,16 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration>
+    <Properties>
+        <property name="logpattern">%highlight{[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %c{1} - %msg%n}
+        </property>
+    </Properties>
+
     <Appenders>
-        <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        <Console name="console" target="SYSTEM_OUT">
+            <PatternLayout disableAnsi="false" pattern="${logpattern}"/>
         </Console>
     </Appenders>
+
     <Loggers>
-        <Logger name="thomsLogger" level="debug" additivity="false">
-            <AppenderRef ref="Console"/>
-        </Logger>
-        <Root level="info">
-            <AppenderRef ref="Console"/>
+        <!-- default -->
+        <Root level="INFO">
+            <AppenderRef ref="console"/>
         </Root>
+        <!-- for everything from nl.thom.mp -->
+        <Logger name="nl.thom.marktplaats" level="DEBUG"/>
     </Loggers>
 </Configuration>
