@@ -1,19 +1,24 @@
 package nl.thom.marktplaats.pages;
 
-import nl.thom.marktplaats.Backdoor;
 import nl.thom.marktplaats.LoginGebruiker;
+import nl.thom.marktplaats.domain.Gebruiker;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 
 import static nl.thom.marktplaats.App.prompt;
 
+@Singleton
 public class InlogPage extends Page {
-    private LoginGebruiker loginUser;
 
-    InlogPage() {
-        loginUser = new LoginGebruiker();
-    }
+    @Inject
+    private LoginGebruiker loginGebruiker;
+
+//    InlogPage() {
+//        loginUser = new LoginGebruiker();
+//    }
 
     static List<String> options = Arrays.asList("Wil je inloggen?", "Ja", "Nee");
 
@@ -28,13 +33,12 @@ public class InlogPage extends Page {
                 case "1":
                     String name = prompt("Gebruikersnaam: ");
                     String password = prompt("Wachtwoord: ");
-                    loginUser.validateCredentials(name, password);
+                    Gebruiker user = loginGebruiker.getUserByUsernameAndPassword(name, password);
+                    loginGebruiker.login(user);
 
 
                 case "x":
                     return;
-                case "?":
-                    Backdoor.open();
                 default:
                     break;
 

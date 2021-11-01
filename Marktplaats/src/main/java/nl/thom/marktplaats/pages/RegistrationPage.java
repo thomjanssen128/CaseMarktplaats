@@ -1,9 +1,16 @@
 package nl.thom.marktplaats.pages;
 
-import nl.thom.marktplaats.Backdoor;
-import nl.thom.marktplaats.RegistrationUser;
-import nl.thom.marktplaats.util.PasswordGenerator;
+//import nl.thom.marktplaats.RegistrationGebruiker;
 
+import nl.thom.marktplaats.daos.GebruikerDao;
+import nl.thom.marktplaats.domain.Gebruiker;
+import nl.thom.marktplaats.util.Bezorgwijze;
+import nl.thom.marktplaats.util.Mailer;
+import nl.thom.marktplaats.util.PasswordGenerator;
+import org.slf4j.Logger;
+
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,7 +18,17 @@ import static nl.thom.marktplaats.App.prompt;
 
 public class RegistrationPage extends Page {
 
-    private RegistrationUser registrationUser = new RegistrationUser();
+    @Inject
+    private EntityManager em;// = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
+
+    @Inject
+    private GebruikerDao userDao;
+
+    @Inject
+    Logger log;
+
+    @Inject
+    private Mailer mailer;
 
     static List<String> options = Arrays.asList("Wil je je registreren?", "Ja", "Nee");
 
@@ -25,16 +42,36 @@ public class RegistrationPage extends Page {
         try {
             switch (prompt(MAAKKEUZE)) {
                 case "1":
-                    String name = prompt("Gebruikersnaam:  ");
+
+                    String username = prompt("Gebruikersnaam:  ");
+                    // TODO: bestaat de username al?
+
                     String email = prompt("Email: ");
+                    // TODO: valideer deze input
+
+                    System.out.println("Welke bezorgwijzen ondersteun je?");
+                    for (Bezorgwijze value : Bezorgwijze.values()){
+                        System.out.println(value.ordinal()+1 + " " + value);
+                    }
+                    String bezorgwijzen = prompt("?");
+
+                    String obeyRulesStr = prompt("Houd je je aan de regels? J/N ");
+                    //TODO: meer uitwerking?
+
+                    boolean obeyRules = obeyRulesStr.equals("J");
                     String password = new PasswordGenerator().generator();
-                    registrationUser.register(name, email, password);
+                    Gebruiker g = Gebruiker.builder()
+                            .username(username)
+                            .email(email)
+                            .password(password)
+                            .obeyRules(obeyRules)
+                            .build();
+                    userDao.save(g);
+                    mailer.sendMail("Je wachtwoord is: " + g.getPassword());
 
 
                 case "x":
                     return;
-                case "?":
-                    Backdoor.open();
                 default:
                     System.out.println("default");
                     break;
