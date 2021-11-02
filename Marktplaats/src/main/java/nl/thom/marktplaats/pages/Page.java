@@ -2,11 +2,12 @@ package nl.thom.marktplaats.pages;
 
 import java.util.List;
 
-public class Page {
+public abstract class Page {
     public final String MAAKKEUZE = "Maak een keuze: ";
 
     public void render() {
         header();
+
     }
 
     public void header() {
@@ -32,7 +33,7 @@ public class Page {
 
         for (Object item : items.subList(1, items.size())) {
             i++;
-            System.out.printf("[%s] %s\n", i == items.size() - 1 ? "x" : i, item);
+            System.out.println("[" + (i == items.size() - 1 ? "x": i) + "] " + item);
         }
         System.out.println("");
 
@@ -40,8 +41,8 @@ public class Page {
     }
 
     public final static void clearConsole() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
+        //System.out.print("\033[H\033[2J");
+        //System.out.flush();
 
     }
 

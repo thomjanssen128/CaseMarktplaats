@@ -7,10 +7,9 @@ import javax.inject.Singleton;
 
 @Singleton
 public class Mailer {
-    @Inject
-    private Logger log;
-    public void sendMail(String m) {
-        log.info("Mail send: " + m);
 
+    public void sendMail(String m) {
+        System.out.println("Mail send: \033[94m" + m + "\033[0m");
     }
+
 }

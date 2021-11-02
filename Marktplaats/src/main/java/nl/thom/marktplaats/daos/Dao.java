@@ -22,6 +22,8 @@ public abstract class Dao<E extends Identifiable<I>, I> { // E is an entity, I i
         return em.find(E(), id); // SELECT .. WHERE id = ..
     }
 
+
+
     public void save(E p) {
         em.getTransaction().begin();
         em.persist(p); // INSERT == persist

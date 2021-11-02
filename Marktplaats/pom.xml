@@ -15,7 +15,13 @@
 
     </properties>
 
-
+    <repositories>
+        <repository>
+            <id>nexus</id>
+            <name>Releases</name>
+            <url>https://nexus.bd2021.nl/repository/maven-releases</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -112,7 +118,11 @@
             <version>3.21.0</version>
             <scope>test</scope>
         </dependency>
-
+        <dependency>
+            <groupId>com.github.christianspruijt</groupId>
+            <artifactId>jwt</artifactId>
+            <version>1.0.0</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
