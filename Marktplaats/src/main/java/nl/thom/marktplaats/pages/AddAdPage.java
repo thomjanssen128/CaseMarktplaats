@@ -1,20 +1,30 @@
 package nl.thom.marktplaats.pages;
 
-import nl.thom.marktplaats.Advertentie;
-import nl.thom.marktplaats.Backdoor;
+import nl.thom.marktplaats.daos.AdvertentieDao;
+import nl.thom.marktplaats.daos.CategorieDao;
+import nl.thom.marktplaats.domain.Advertentie;
 import nl.thom.marktplaats.form.Formulier;
 
-import java.util.*;
+import javax.inject.Inject;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 
+import static nl.thom.marktplaats.App.currentUser;
 import static nl.thom.marktplaats.App.prompt;
-import static nl.thom.marktplaats.pages.HomePage.currentUser;
 
 public class AddAdPage extends Page {
+    private Map<String, String> antwoorden;
     static List<String> options = Arrays.asList(
             "Wil je een advertentie plaatsen?",
             "Ja",
             "Nee"
     );
+
+    @Inject
+    AdvertentieDao advertentieDao;
+    @Inject
+    CategorieDao catDao;
 
     @Override
     public void render() {
@@ -25,11 +35,10 @@ public class AddAdPage extends Page {
         try {
             switch (prompt(MAAKKEUZE)) {
                 case "1":
+                    askFields();
                     addAd();
                 case "x":
                     return;
-                case "?":
-                    Backdoor.open();
                 default:
                     break;
             }
@@ -40,22 +49,27 @@ public class AddAdPage extends Page {
     }
 
     private Map<String, String> antwoorden() {
-        Set<String> vragen = Set.of("Title", "Omschrijving", "Prijs");
+        List<String> vragen = List.of("Titel", "Omschrijving", "Prijs");
         Formulier f = new Formulier();
         f.askForm(vragen);
         return f.submit();
 
     }
 
+    private void askFields() {
+        antwoorden = antwoorden();
+        renderMenu(catDao.findAll());
+    }
+
     private Advertentie addAd() {
-        Map<String, String> antwoorden = antwoorden();
-        Advertentie a = new Advertentie.Builder()
-                .title(antwoorden.get("Titel"))
+
+        Advertentie a = Advertentie.builder()
+                .titel(antwoorden.get("Titel"))
                 .omschrijving(antwoorden.get("Omschrijving"))
                 .prijs(Double.parseDouble(antwoorden.get("Prijs")))
+                .ownerId(currentUser.getId())
                 .build();
-
-        currentUser.advertenties.add(a); // hoe anders?
+        advertentieDao.save(a);
         return a;
     }
 

@@ -1,9 +1,21 @@
 package nl.thom.marktplaats.daos;
 
-import nl.thom.marktplaats.Advertentie;
+import nl.thom.marktplaats.domain.Advertentie;
+import nl.thom.marktplaats.domain.Categorie;
+import org.slf4j.Logger;
 
-public class AdvertentieDao {
-    public void save(Advertentie advertentie) {
-        System.out.println(advertentie);
+import javax.inject.Inject;
+import javax.inject.Singleton;
+import javax.persistence.EntityManager;
+
+@Singleton
+public class AdvertentieDao extends Dao<Advertentie, Integer> {
+
+    private final EntityManager em;
+
+    @Inject
+    public AdvertentieDao(EntityManager em) {
+        this.em = em;
     }
+
 }

@@ -14,18 +14,20 @@ import static nl.thom.marktplaats.App.prompt;
 public class HomePage extends Page {
 
     @Inject
-    private  RegistrationPage registrationPage;
+    private RegistrationPage registrationPage;
     @Inject
-    private  InlogPage inlogPage;
+    private InlogPage inlogPage;
     @Inject
     private LoginGebruiker loginGebruiker;
-//    private final ShowAdvertenties showAdvertenties;
+    @Inject
+    private AddAdPage addAdPage;
+    //    private final ShowAdvertenties showAdvertenties;
 //
 //
     private boolean running = true;
 
     List<String> options1 = Arrays.asList(
-            "Welkom bij Marktplaats wat wil je doen?",
+            "Welkom bij Marktplaats. Wat wil je doen?",
             "Inloggen",
             "Registreren",
             "Stoppen");
@@ -38,15 +40,13 @@ public class HomePage extends Page {
             "Stoppen");
 
 
-
-
     @Override
     public void render() {
         while (running) {
             clearConsole();
             header();
             String cn = App.getCurrentUser().getUsername();
-            System.out.println(cn == null?"":"\033[94m"+cn+"\033[0m");
+            System.out.println(cn == null ? "" : "\033[94m" + cn + "\033[0m");
 
             if (App.getCurrentUser().getUsername() == null) {
                 renderMenu(options1);
@@ -93,11 +93,11 @@ public class HomePage extends Page {
                     break;
                 case "2":
                     System.out.println("Advertentie plaatsen");
-//                    addAdPage.render();
+                    addAdPage.render();
                     break;
                 case "3":
                     System.out.println("Advertentie bekijken");
-//                    showAdvertenties.show(currentUser.advertenties);
+                    //showAdvertenties.show(currentUser.advertenties);
                     break;
                 case "4":
                     System.out.println("Uitloggen");
