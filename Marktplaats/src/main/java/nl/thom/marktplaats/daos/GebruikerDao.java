@@ -13,7 +13,6 @@ import java.util.List;
 @Singleton
 public class GebruikerDao extends Dao<Gebruiker, Integer> {
 
-//    @Inject
     private final EntityManager em;
 
     @Inject
@@ -30,7 +29,21 @@ public class GebruikerDao extends Dao<Gebruiker, Integer> {
         query.setParameter("password", password);
         List<Gebruiker> resultList = query.getResultList();
         return (resultList.size() != 0?resultList.get(0):Gebruiker.builder().build());
+    }
+
+    public Gebruiker getUserByUsername(String username) {
+        TypedQuery<Gebruiker> query = em.createNamedQuery("Gebruiker.findByUsername", Gebruiker.class);
+        query.setParameter("username", username);
+        List<Gebruiker> resultList = query.getResultList();
+        return (resultList.size() != 0?resultList.get(0):Gebruiker.builder().build());
 
     }
 
+    public Gebruiker getUserByEmail(String email) {
+        TypedQuery<Gebruiker> query = em.createNamedQuery("Gebruiker.findByEmail", Gebruiker.class);
+        query.setParameter("email", email);
+        List<Gebruiker> resultList = query.getResultList();
+        return (resultList.size() != 0?resultList.get(0):Gebruiker.builder().build());
+
+    }
 }

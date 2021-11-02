@@ -18,4 +18,11 @@ public class RegistrationService {
         Gebruiker g = gebruikerDao.getUserByEmail(email);
         return g.getEmail() == null;
     }
+
+    public boolean bezorgwijzeThuisIsGekozen(int bezorgwijzen){
+        int mask = (bezorgwijzen & 10);
+        return mask != 0;
+
+
+    }
 }

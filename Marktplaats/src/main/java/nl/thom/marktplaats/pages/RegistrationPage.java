@@ -20,12 +20,9 @@ import java.util.List;
 import static nl.thom.marktplaats.App.prompt;
 
 public class RegistrationPage extends Page {
-
-    @Inject
-    private EntityManager em;// = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
-
+//
 //    @Inject
-//    private GebruikerDao userDao;
+//    private EntityManager em;// = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
 
     @Inject
     private RegistreerGebruiker registreerGebruiker;
@@ -39,8 +36,9 @@ public class RegistrationPage extends Page {
     @Inject
     private Mailer mailer;
 
-    static List<String> options = Arrays.asList("Wil je je registreren?", "Ja", "Nee");
     Adres adres;
+
+    static List<String> options = Arrays.asList("Wil je je registreren?", "Ja", "Nee");
 
     @Override
     public void render() {
@@ -83,15 +81,11 @@ public class RegistrationPage extends Page {
                     int index = 0;
                     for (String keuze : keuzes) {
                         System.out.println(keuze);
-                        //bezorgwijzen.append(keuze.contains("J") ? "1" : "0");
                         bezorgwijzen = bezorgwijzen << 1;
                         if (keuze.contains("J")) bezorgwijzen++;
 
                     }
-
-                    int mask = (bezorgwijzen & 10);
-                    if (mask != 0) {
-                        // vraag adres
+                    if(registrationService.bezorgwijzeThuisIsGekozen(bezorgwijzen)) {
                         System.out.println("Je koos THUIS, vul nu je adres in.");
                         String straat = prompt("Straat: ");
                         String huisnr = prompt("Huisnummer: ");
@@ -105,7 +99,7 @@ public class RegistrationPage extends Page {
                                 .build();
 
                     } else {
-                        adres = Adres.builder().build();
+                        adres = Adres.builder().build(); // nullAdres
                     }
                     String obeyRulesStr = prompt("Houd je je aan de regels? J/N ");
                     //TODO: meer uitwerking?
@@ -137,7 +131,7 @@ public class RegistrationPage extends Page {
             }
         } catch (
                 Exception e) {
-            System.out.println(e.getMessage());
+            log.error("Iets ging mis. " + e);
         }
 
     }

@@ -1,10 +1,10 @@
 package nl.thom.marktplaats.domain;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.Embeddable;
 
-@Data
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
 @Embeddable
 public class Adres {
     private String straat;

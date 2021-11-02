@@ -18,7 +18,6 @@ public class LoginGebruiker {
     GebruikerDao userDao;
 
     private Gebruiker user;
-    private Gebruiker nullUser = Gebruiker.builder().build();
 
     static List<Gebruiker> users = App.gebruikers;
 

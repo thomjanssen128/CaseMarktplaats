@@ -3,10 +3,9 @@ package nl.thom.marktplaats.domain;
 
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.NamedQuery;
-import javax.validation.constraints.Email;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Data
 @Builder
@@ -19,28 +18,28 @@ import javax.validation.constraints.Email;
 @NamedQuery(name = "Gebruiker.findByUsernameAndPassword",
         query = "SELECT p FROM Gebruiker p WHERE p.username = :username AND p.password = :password"
 )
+@NamedQuery(name = "Gebruiker.findByUsername",
+        query = "SELECT p FROM Gebruiker p WHERE p.username = :username"
+)
+@NamedQuery(name = "Gebruiker.findByEmail",
+        query = "SELECT p FROM Gebruiker p WHERE p.email = :email"
+)
 
 public class Gebruiker extends AbstractEntity implements Identifiable<Integer> {
+    @Column(unique = true)
     public String username;
-
-//    @Email
-//    @Column(unique = true)
+    //@Email
+    @Column(unique = true)
     String email;
-
     String password;
     boolean obeyRules;
-    byte bezorgwijzen;
+    int bezorgwijzen;
 
-    //public List<Integer> advertenties;
-    //public List<Advertentie> advertenties = new ArrayList(); // Toekomstmuziek
-
+    @Embedded
+    Adres adres;
 
     public Integer getId() {
         return id;
-    }
-
-    public void setBezorgwijzen(byte b) {
-        this.bezorgwijzen = b;
     }
 
     @Override
