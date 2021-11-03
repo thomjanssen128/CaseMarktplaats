@@ -8,7 +8,7 @@ public class PasswordGenerator {
     int lengthPassword = 6;
     Random r = new Random();
 
-    public String generator(){
+    public String generate(){
     String password= "";
         for (int i = 0; i < lengthPassword; i++) {
             password += r.ints(minChar, maxChar)
