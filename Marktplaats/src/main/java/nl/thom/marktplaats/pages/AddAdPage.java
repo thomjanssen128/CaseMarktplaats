@@ -29,7 +29,7 @@ public class AddAdPage extends Page {
         clearConsole();
         header();
         System.out.println();
-        renderMenuWithTitle(options);
+        renderMenu(options);
         try {
             switch (prompt(MAAKKEUZE)) {
                 case "1":
@@ -57,9 +57,9 @@ public class AddAdPage extends Page {
     private void askFields() {
         antwoorden = antwoorden();
         List<String> catsMenu = new ArrayList<>();
-        catsMenu.add("Categorie?");
-        catsMenu.addAll(catDao.findAll());
-        renderMenu(catsMenu);
+        renderMenuOptions(catDao.findAll());
+        String catKeuze = prompt("");
+        antwoorden.put("categorie", catKeuze);
 
     }
 
@@ -69,6 +69,7 @@ public class AddAdPage extends Page {
                 .titel(antwoorden.get("Titel"))
                 .omschrijving(antwoorden.get("Omschrijving"))
                 .prijs(Double.parseDouble(antwoorden.get("Prijs")))
+                .categorie(antwoorden.get("categorie"))
                 .ownerId(currentUser.getId())
                 .build();
         advertentieDao.save(a);

@@ -1,18 +1,21 @@
 package nl.thom.marktplaats.pages;
 
-import nl.thom.marktplaats.Advertentie;
-import nl.thom.marktplaats.Gebruiker;
-
+import nl.thom.marktplaats.App;
+import nl.thom.marktplaats.daos.GebruikerDao;
+import nl.thom.marktplaats.domain.Advertentie;
+import static nl.thom.marktplaats.util.Util.print;
+import javax.inject.Inject;
 import java.util.List;
 
 public class ShowAdvertenties {
-    public void show(List<Advertentie> ads){
-        if (ads.size() == 0) {
-            System.out.println("Nog geen adverteies");
-        }
-        for (Advertentie advertentie : ads) {
-            System.out.println(advertentie);
-        }
+    @Inject
+    GebruikerDao userDao;
 
+    public void show() {
+        List<Advertentie> ads = userDao.getAllAdsOfUserById(App.currentUser.getId());
+        for (Advertentie ad : ads) {
+            print(ad.toString());
+        }
     }
+
 }

@@ -4,6 +4,7 @@ import com.github.christianspruijt.jwt.JWT;
 import nl.thom.marktplaats.daos.AdvertentieDao;
 import nl.thom.marktplaats.daos.CategorieDao;
 import nl.thom.marktplaats.daos.GebruikerDao;
+import nl.thom.marktplaats.domain.Advertentie;
 import nl.thom.marktplaats.domain.Categorie;
 import nl.thom.marktplaats.domain.Gebruiker;
 import nl.thom.marktplaats.pages.HomePage;
@@ -30,11 +31,15 @@ public class App {
     @Inject
     private CategorieDao catDao;
     @Inject
+    private AdvertentieDao adDao;
+
+    @Inject
     private HomePage homePage;
 
 
     static List<Gebruiker> gebruikers = new ArrayList<>();
     static List<Categorie> categories = new ArrayList<>();
+    static List<Advertentie> ads = new ArrayList<>();
 
     private static final Scanner scanner;// = new Scanner(System.in);
 
@@ -87,13 +92,26 @@ public class App {
         categories.add(Categorie.builder().naam("Kinderen").build());
     }
 
+    private static void addAds() {
+        ads.add((Advertentie.builder().titel("Stoel").prijs(23.50d).categorie("2").ownerId(1).build()));
+        ads.add((Advertentie.builder().titel("Jaapie").prijs(0d).categorie("4").ownerId(1).build()));
+        ads.add((Advertentie.builder().titel("Poes").prijs(120d).categorie("1").ownerId(3).build()));
+        ads.add((Advertentie.builder().titel("NES").prijs(1234567).categorie("3").ownerId(2).build()));
+        ads.add((Advertentie.builder().titel("Muis").prijs(12d).categorie("3").ownerId(2).build()));
+        ads.add((Advertentie.builder().titel("OCP-boek").prijs(80d).categorie("3").ownerId(2).build()));
+        ads.add((Advertentie.builder().titel("Gedicht").prijs(1d).categorie("1").ownerId(1).build()));
+    }
+
     public void boot() {
 
         currentUser = Gebruiker.builder().build(); //nullUser
         addGebruikers();
         addCats();
+        addAds();
         gebruikers.forEach(userDao::save);
         categories.forEach(catDao::save);
+        ads.forEach(adDao::save);
+        currentUser = gebruikers.get(1);
         homePage.render();
     }
 
