@@ -2,6 +2,7 @@ package nl.thom.marktplaats.pages;
 
 import nl.thom.marktplaats.App;
 import nl.thom.marktplaats.LoginGebruiker;
+import nl.thom.marktplaats.domain.Advertentie;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -9,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static nl.thom.marktplaats.App.prompt;
+import static nl.thom.marktplaats.util.Util.print;
 
 @Singleton
 public class HomePage extends Page {
@@ -21,6 +23,8 @@ public class HomePage extends Page {
     private LoginGebruiker loginGebruiker;
     @Inject
     private AddAdPage addAdPage;
+    @Inject
+    private ShowAdvertenties showAdvertenties;
     //    private final ShowAdvertenties showAdvertenties;
 //
 //
@@ -55,7 +59,7 @@ public class HomePage extends Page {
                 renderMenu(options2);
                 promptWithLogin();
             }
-            System.out.println("");
+            print("");
 
 
         }
@@ -72,12 +76,12 @@ public class HomePage extends Page {
                     registrationPage.render();
                     break;
                 case "x":
-                    System.out.println("Tot ziens!");
+                    print("Tot ziens!");
                     running = false;
                     return;
 
                 default:
-                    System.out.println(MAAKKEUZE);
+                    print(MAAKKEUZE);
                     break;
             }
         } catch (Exception e) {
@@ -89,26 +93,27 @@ public class HomePage extends Page {
         try {
             switch (prompt(MAAKKEUZE)) {
                 case "1":
-                    System.out.println("Account aanpassen");
+                    print("Account aanpassen");
                     break;
                 case "2":
-                    System.out.println("Advertentie plaatsen");
+                    print("Advertentie plaatsen");
                     addAdPage.render();
                     break;
                 case "3":
-                    System.out.println("Advertentie bekijken");
-                    //showAdvertenties.show(currentUser.advertenties);
+                    print("Advertentie bekijken");
+                    showAdvertenties.show();
+
                     break;
                 case "4":
-                    System.out.println("Uitloggen");
+                    print("Uitloggen");
                     App.setCurrentUser(App.nullUser);
                     break;
                 case "x":
-                    System.out.println("Tot ziens!");
+                    print("Tot ziens!");
                     running = false;
                     return;
                 default:
-                    System.out.println(MAAKKEUZE);
+                    print(MAAKKEUZE);
                     break;
             }
         } catch (Exception e) {

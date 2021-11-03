@@ -8,6 +8,8 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.List;
 
+import static nl.thom.marktplaats.util.Util.print;
+
 @Singleton
 public class LoginGebruiker {
 
@@ -27,12 +29,13 @@ public class LoginGebruiker {
 
     public Gebruiker getUserByUsernameAndPassword(String username, String password) {
         Gebruiker user = userDao.getUserByUsernameAndPassword(username, password);
-        if (user.getUsername().length() == 0)
+        if (user.getUsername().length() == 0) {
             log.warn("Username and/or password are unknown.");
+            print("\033[93mUsername and/or password are unknown.\033[0m");
+        }
         return user;
 
         //
-        //System.out.println("\033[93mUsername and/or password are unknown.\033[0m");
 
     }
 

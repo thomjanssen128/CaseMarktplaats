@@ -2,6 +2,8 @@ package nl.thom.marktplaats.pages;
 
 import java.util.List;
 
+import static nl.thom.marktplaats.util.Util.print;
+
 public abstract class Page {
     public final String MAAKKEUZE = "Maak een keuze: ";
 
@@ -18,8 +20,7 @@ public abstract class Page {
         line += name + " ";
         line += "* ".repeat(length / 2);
         line += "\033[0m";
-        System.out.println(line);
-        //System.out.println();
+        print(line);
     }
 
     @Override
@@ -33,16 +34,23 @@ public abstract class Page {
 
         for (Object item : items.subList(1, items.size())) {
             i++;
-            System.out.println("[" + (i == items.size() - 1 ? "x": i) + "] " + item);
+            print("[" + (i == items.size() - 1 ? "x": i) + "] " + item);
         }
-        System.out.println("");
+        print("");
+    }
 
+    public static void renderMenuOptions(List items){
+        int i = 0;
+        for (Object item : items) {
+            i++;
+            print("[" + i + "] " + item);
+        }
 
     }
 
     public final static void clearConsole() {
-        //System.out.print("\033[H\033[2J");
-        //System.out.flush();
+//        System.out.print("\033[H\033[2J");
+//        System.out.flush();
 
     }
 

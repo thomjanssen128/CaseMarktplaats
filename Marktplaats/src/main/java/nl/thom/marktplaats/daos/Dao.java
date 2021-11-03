@@ -1,22 +1,18 @@
 package nl.thom.marktplaats.daos;
 
-import nl.thom.marktplaats.domain.*;
 import nl.thom.marktplaats.domain.Identifiable;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import java.lang.reflect.ParameterizedType;
-import java.util.List;
+import java.util.Collection;
 
 public abstract class Dao<E extends Identifiable<I>, I> { // E is an entity, I is a type of id
 
     @Inject
     protected EntityManager em;
 
-    public List<E> findAll() {  // SELECT ...
-        return em.createNamedQuery(typeSimple() + ".findAll", E()).getResultList(); // JPQL Java Persistence Query Language
-    }
+
 
     public E find(I id) {
         return em.find(E(), id); // SELECT .. WHERE id = ..

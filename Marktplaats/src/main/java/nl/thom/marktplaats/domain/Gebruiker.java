@@ -24,6 +24,9 @@ import java.util.Collection;
 @NamedQuery(name = "Gebruiker.findByEmail",
         query = "SELECT p FROM Gebruiker p WHERE p.email = :email"
 )
+@NamedQuery(name = "Gebruiker.findAllMyAds",
+        query = "SELECT a FROM Advertentie a WHERE a.ownerId = :id"
+)
 
 public class Gebruiker extends AbstractEntity implements Identifiable<Integer> {
     @Column(unique = true)

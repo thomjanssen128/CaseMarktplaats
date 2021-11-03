@@ -1,5 +1,6 @@
 package nl.thom.marktplaats.daos;
 
+import nl.thom.marktplaats.domain.Advertentie;
 import nl.thom.marktplaats.domain.Gebruiker;
 import org.slf4j.Logger;
 
@@ -45,5 +46,11 @@ public class GebruikerDao extends Dao<Gebruiker, Integer> {
         List<Gebruiker> resultList = query.getResultList();
         return (resultList.size() != 0?resultList.get(0):Gebruiker.builder().build());
 
+    }
+
+    public List<Advertentie> getAllAdsOfUserById(int id) {
+        TypedQuery<Advertentie> query = em.createNamedQuery("Gebruiker.findAllMyAds", Advertentie.class);
+        query.setParameter("id", id);
+        return query.getResultList();
     }
 }
