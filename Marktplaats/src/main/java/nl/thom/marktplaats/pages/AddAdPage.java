@@ -6,9 +6,7 @@ import nl.thom.marktplaats.domain.Advertentie;
 import nl.thom.marktplaats.form.Formulier;
 
 import javax.inject.Inject;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static nl.thom.marktplaats.App.currentUser;
 import static nl.thom.marktplaats.App.prompt;
@@ -31,7 +29,7 @@ public class AddAdPage extends Page {
         clearConsole();
         header();
         System.out.println();
-        renderMenu(options);
+        renderMenuWithTitle(options);
         try {
             switch (prompt(MAAKKEUZE)) {
                 case "1":
@@ -58,7 +56,11 @@ public class AddAdPage extends Page {
 
     private void askFields() {
         antwoorden = antwoorden();
-        renderMenu(catDao.findAll());
+        List<String> catsMenu = new ArrayList<>();
+        catsMenu.add("Categorie?");
+        catsMenu.addAll(catDao.findAll());
+        renderMenu(catsMenu);
+
     }
 
     private Advertentie addAd() {
