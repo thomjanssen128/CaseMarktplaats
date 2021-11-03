@@ -2,15 +2,14 @@ package nl.thom.marktplaats.pages;
 
 import nl.thom.marktplaats.App;
 import nl.thom.marktplaats.LoginGebruiker;
-import nl.thom.marktplaats.domain.Advertentie;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 
-import static nl.thom.marktplaats.App.prompt;
 import static nl.thom.marktplaats.util.Util.print;
+import static nl.thom.marktplaats.util.Util.prompt;
 
 @Singleton
 public class HomePage extends Page {
@@ -24,10 +23,10 @@ public class HomePage extends Page {
     @Inject
     private AddAdPage addAdPage;
     @Inject
+    private DeleteAdPage delAdPage;
+    @Inject
     private ShowAdvertenties showAdvertenties;
-    //    private final ShowAdvertenties showAdvertenties;
-//
-//
+
     private boolean running = true;
 
     List<String> options1 = Arrays.asList(
@@ -39,10 +38,10 @@ public class HomePage extends Page {
             "Wat wil je doen?",
             "Account aanpassen",
             "Advertentie plaatsen",
+            "Advertentie verwijderen",
             "Mijn advertenties bekijken",
             "Uitloggen",
             "Stoppen");
-
 
     @Override
     public void render() {
@@ -60,10 +59,7 @@ public class HomePage extends Page {
                 promptWithLogin();
             }
             print("");
-
-
         }
-
     }
 
     public void promptNoLogin() {
@@ -100,11 +96,14 @@ public class HomePage extends Page {
                     addAdPage.render();
                     break;
                 case "3":
-                    print("Advertentie bekijken");
-                    showAdvertenties.show();
-
+                    print("Advertentie verwijderen");
+                    delAdPage.render();
                     break;
                 case "4":
+                    print("Advertentie bekijken");
+                    showAdvertenties.render();
+                    break;
+                case "5":
                     print("Uitloggen");
                     App.setCurrentUser(App.nullUser);
                     break;

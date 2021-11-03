@@ -16,13 +16,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static nl.thom.marktplaats.App.prompt;
 import static nl.thom.marktplaats.util.Util.print;
+import static nl.thom.marktplaats.util.Util.prompt;
 
 public class RegistrationPage extends Page {
-//
-//    @Inject
-//    private EntityManager em;// = Persistence.createEntityManagerFactory("MySQL").createEntityManager();
 
     @Inject
     private RegistreerGebruiker registreerGebruiker;
@@ -50,71 +47,19 @@ public class RegistrationPage extends Page {
         try {
             switch (prompt(MAAKKEUZE)) {
                 case "1":
-                    String username = "";
-                    boolean notUnique = true;
-                    while (notUnique) {
-                        username = prompt("Gebruikersnaam:  ");
-                        if (registrationService.usernameIsUnique(username)) {
-                            notUnique = false;
-                        } else {
-                            print("\033[94mGebruiksnaam bestaat al! Probeer opnieuw.\033[0m");
-                        }
-                        ;
-                    }
-                    ;
+                    String username = registreerUsername();
+                    String email = registreerEmail();
+                    int bezorgwijzen = registreerBezorgwijzen();
 
-                    String email = "";
-                    notUnique = true;
-                    while (notUnique) {
-                        email = prompt("E-mail:  ");
-                        if (registrationService.emailIsUnique(email)) {
-                            notUnique = false;
-                        } else {
-                            System.out.println("\033[94mDit e-mailadres is al geregistreerd. Probeer opnieuw.\033[0m");
-                        }
-                        ;
-                    }
-                    ;
-
-                    System.out.println("Welke bezorgwijzen ondersteun je?");
-                    List<String> keuzes = new ArrayList<>();
-                    for (Bezorgwijze value : Bezorgwijze.values()) {
-                        keuzes.add(prompt(value + "? J/N  "));
-                    }
-                    int bezorgwijzen = 0;
-                    int index = 0;
-                    for (String keuze : keuzes) {
-                        bezorgwijzen = bezorgwijzen << 1;
-                        if (keuze.contains("J")) bezorgwijzen++;
-
-                    }
                     if (registrationService.bezorgwijzeThuisIsGekozen(bezorgwijzen)) {
-                        System.out.println("Je koos THUIS, vul nu je adres in.");
-                        String straat = prompt("Straat: ");
-                        String huisnr = prompt("Huisnummer: ");
-                        String postcode = prompt("Postcode: ");
-                        String gemeente = prompt("Gemeente: ");
-                        adres = Adres.builder()
-                                .straat(straat)
-                                .huisnummer(huisnr)
-                                .postcode(postcode)
-                                .stad(gemeente)
-                                .build();
-
+                        adres = registreerAdres();
                     } else {
                         adres = Adres.builder().build(); // nullAdres
                     }
 
-                    boolean obeyRules = false;
-                    boolean ok = false;
-                    while (!ok) {
-                        String obeyRulesStr = prompt("Houd je je aan de regels? J/N ");
-                        obeyRules = obeyRulesStr.equals("J");
-                        if (obeyRules) ok = true;
-                        else print("\033[93mTja, het moet. Probeer nog 'ns...\033[0m");
-                    }
-                    String password = new PasswordGenerator().generate();
+                    boolean obeyRules = registreerObeyRules();
 
+                    String password = new PasswordGenerator().generate();
 
                     Gebruiker g = Gebruiker.builder()
                             .username(username)
@@ -125,29 +70,90 @@ public class RegistrationPage extends Page {
                             .adres(adres)
                             .build();
 
+                    registreerGebruiker.registreerGebruiker(g); // of direct dao?
 
-                    registreerGebruiker.registreerGebruiker(g);
                     mailer.sendMail("Je wachtwoord is: " + g.getPassword());
-
 
                 case "x":
                     return;
                 default:
-                    System.out.println("default");
+                    print("default");
                     break;
-
             }
-
         } catch (
                 Exception e) {
             log.error("Iets ging mis. " + e);
         }
-
     }
 
-    public void renderPage() {
-        render();
-
+    private String registreerUsername() {
+        String username = "";
+        boolean notUnique = true;
+        while (notUnique) {
+            username = prompt("Gebruikersnaam:  ");
+            if (registrationService.usernameIsUnique(username)) {
+                notUnique = false;
+            } else {
+                print("\033[94mGebruiksnaam bestaat al! Probeer opnieuw.\033[0m");
+            }
+        }
+        return username;
     }
 
+    private String registreerEmail() {
+        String email = "";
+        boolean notUnique = true;
+        while (notUnique) {
+            email = prompt("E-mail:  ");
+            if (registrationService.emailIsUnique(email)) {
+                notUnique = false;
+            } else {
+                System.out.println("\033[94mDit e-mailadres is al geregistreerd. Probeer opnieuw.\033[0m");
+            }
+        }
+        return email;
+    }
+
+    private int registreerBezorgwijzen() {
+        System.out.println("Welke bezorgwijzen ondersteun je?");
+        List<String> keuzes = new ArrayList<>();
+        for (Bezorgwijze value : Bezorgwijze.values()) {
+            keuzes.add(prompt(value + "? J/N  "));
+        }
+        int bezorgwijzen = 0;
+        int index = 0;
+        for (String keuze : keuzes) {
+            bezorgwijzen = bezorgwijzen << 1;
+            if (keuze.contains("J")) bezorgwijzen++;
+        }
+
+        return bezorgwijzen;
+    }
+
+    private Adres registreerAdres() {
+        print("Je koos THUIS, vul nu je adres in.");
+        String straat = prompt("Straat: ");
+        String huisnr = prompt("Huisnummer: ");
+        String postcode = prompt("Postcode: ");
+        String gemeente = prompt("Gemeente: ");
+        adres = Adres.builder()
+                .straat(straat)
+                .huisnummer(huisnr)
+                .postcode(postcode)
+                .stad(gemeente)
+                .build();
+        return adres;
+    }
+
+    private boolean registreerObeyRules() {
+        boolean obeyRules = false;
+        boolean ok = false;
+        while (!ok) {
+            String obeyRulesStr = prompt("Houd je je aan de regels? J/N ");
+            obeyRules = obeyRulesStr.equals("J");
+            if (obeyRules) ok = true;
+            else print("\033[93mTja, het moet. Probeer nog 'ns...\033[0m");
+        }
+        return obeyRules;
+    }
 }

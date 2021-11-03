@@ -4,46 +4,39 @@ import lombok.*;
 import nl.thom.marktplaats.util.Util;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.validation.constraints.NotNull;
-import java.text.NumberFormat;
-import java.util.Currency;
-import java.util.Locale;
 
-@Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@Data @Builder @NoArgsConstructor @AllArgsConstructor
 @Entity
-
-@NamedQuery(name = "Advertentie.findAll",
-        query = "SELECT p FROM Advertentie p"
-)
-@NamedQuery(name = "Advertentie.getAdsFromUser",
-        query = "SELECT p FROM Advertentie p WHERE p.ownerId = :id"
-)
-
+@NamedQuery(name = "Advertentie.findAll", query = "SELECT a FROM Advertentie a")
+@NamedQuery(name = "Advertentie.getAdsFromUserById", query = "SELECT a FROM Advertentie a WHERE a.owner.id = :id")
 public class Advertentie extends AbstractEntity implements Identifiable<Integer> {
+
     @NotNull
-    String titel;
-    String omschrijving;
+    private String titel;
+
+    private String omschrijving;
+
     @NotNull
-    double prijs;
-    @NotNull
-    String categorie;
+    private double prijs;
+
+    @NotNull @ManyToOne
+    private Categorie categorie;
+
     //List media;
 
-    @NotNull
-    private int ownerId;
+    @NotNull @ManyToOne
+    private Gebruiker owner;
 
     @Override
     public String toString() {
-        String s = "Ad: "
-                + this.getId() + " "
-                + this.getTitel() + " "
-                + this.getCategorie() + " "
-                + Util.prijs(this.getPrijs());
-        return s;
+        return "Ad: "
+                + getId() + " "
+                + getTitel() + " "
+                + getCategorie() + " "
+                + Util.prijs(getPrijs());
     }
 
 }

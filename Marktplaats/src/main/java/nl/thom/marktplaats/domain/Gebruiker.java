@@ -1,11 +1,9 @@
 package nl.thom.marktplaats.domain;
 
-
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Collection;
+import javax.validation.constraints.Email;
 
 @Data
 @Builder
@@ -13,37 +11,35 @@ import java.util.Collection;
 @AllArgsConstructor
 @Entity
 @NamedQuery(name = "Gebruiker.findAll",
-        query = "SELECT p FROM Gebruiker p"
+        query = "SELECT g FROM Gebruiker g"
 )
 @NamedQuery(name = "Gebruiker.findByUsernameAndPassword",
-        query = "SELECT p FROM Gebruiker p WHERE p.username = :username AND p.password = :password"
+        query = "SELECT g FROM Gebruiker g WHERE g.username = :username AND g.password = :password"
 )
 @NamedQuery(name = "Gebruiker.findByUsername",
-        query = "SELECT p FROM Gebruiker p WHERE p.username = :username"
+        query = "SELECT g FROM Gebruiker g WHERE g.username = :username"
 )
 @NamedQuery(name = "Gebruiker.findByEmail",
-        query = "SELECT p FROM Gebruiker p WHERE p.email = :email"
+        query = "SELECT g FROM Gebruiker g WHERE g.email = :email"
 )
 @NamedQuery(name = "Gebruiker.findAllMyAds",
-        query = "SELECT a FROM Advertentie a WHERE a.ownerId = :id"
+        query = "SELECT a FROM Advertentie a WHERE a.owner.id = :id"
 )
 
 public class Gebruiker extends AbstractEntity implements Identifiable<Integer> {
     @Column(unique = true)
-    public String username;
-    //@Email
+    private String username;
+
+    @Email
     @Column(unique = true)
-    String email;
-    String password;
-    boolean obeyRules;
-    int bezorgwijzen;
+    private String email;
+
+    private String password;
+    private boolean obeyRules;
+    private int bezorgwijzen;
 
     @Embedded
-    Adres adres;
-
-    public Integer getId() {
-        return id;
-    }
+    private Adres adres;
 
     @Override
     public String toString() {

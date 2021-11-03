@@ -14,5 +14,4 @@ public class RegistreerGebruiker {
     public void registreerGebruiker(Gebruiker g) {
         gebruikerDao.save(g);
     }
-
 }

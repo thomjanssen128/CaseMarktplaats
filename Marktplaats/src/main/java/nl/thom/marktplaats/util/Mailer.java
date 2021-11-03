@@ -1,15 +1,13 @@
 package nl.thom.marktplaats.util;
 
-import org.slf4j.Logger;
-
-import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import static nl.thom.marktplaats.util.Util.print;
 
 @Singleton
 public class Mailer {
 
     public void sendMail(String m) {
-        System.out.println("Mail send: \033[94m" + m + "\033[0m");
+        print("Mail send: \033[94m" + m + "\033[0m");
     }
-
 }

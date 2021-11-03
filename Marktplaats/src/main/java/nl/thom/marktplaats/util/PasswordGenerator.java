@@ -8,8 +8,8 @@ public class PasswordGenerator {
     int lengthPassword = 6;
     Random r = new Random();
 
-    public String generate(){
-    String password= "";
+    public String generate() {
+        String password = "";
         for (int i = 0; i < lengthPassword; i++) {
             password += r.ints(minChar, maxChar)
                     .filter(j -> (j <= 57 || j >= 65) && (j <= 90 || j >= 97))
@@ -22,6 +22,4 @@ public class PasswordGenerator {
 
         return password;
     }
-
-
 }

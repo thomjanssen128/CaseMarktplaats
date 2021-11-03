@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.List;
 
 import static nl.thom.marktplaats.util.Util.print;
 
@@ -18,10 +17,6 @@ public class LoginGebruiker {
 
     @Inject
     GebruikerDao userDao;
-
-    private Gebruiker user;
-
-    static List<Gebruiker> users = App.gebruikers;
 
     public void login(Gebruiker gebruiker) {
         App.setCurrentUser(gebruiker);
@@ -38,6 +33,4 @@ public class LoginGebruiker {
         //
 
     }
-
-
 }

@@ -2,23 +2,23 @@ package nl.thom.marktplaats.pages;
 
 import nl.thom.marktplaats.LoginGebruiker;
 import nl.thom.marktplaats.domain.Gebruiker;
+import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.util.Arrays;
 import java.util.List;
 
-import static nl.thom.marktplaats.App.prompt;
+import static nl.thom.marktplaats.util.Util.print;
+import static nl.thom.marktplaats.util.Util.prompt;
 
 @Singleton
 public class InlogPage extends Page {
 
     @Inject
+    Logger log;
+    @Inject
     private LoginGebruiker loginGebruiker;
-
-//    InlogPage() {
-//        loginUser = new LoginGebruiker();
-//    }
 
     static List<String> options = Arrays.asList("Wil je inloggen?", "Ja", "Nee");
 
@@ -26,7 +26,7 @@ public class InlogPage extends Page {
     public void render() {
         clearConsole();
         header();
-        System.out.println();
+        print("");
         renderMenu(options);
         try {
             switch (prompt(MAAKKEUZE)) {
@@ -36,22 +36,17 @@ public class InlogPage extends Page {
                     Gebruiker user = loginGebruiker.getUserByUsernameAndPassword(name, password);
                     loginGebruiker.login(user);
 
-
                 case "x":
                     return;
                 default:
                     break;
-
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            log.error(e.getMessage());
         }
-
     }
 
     public void renderPage() {
         render();
-
     }
-
 }

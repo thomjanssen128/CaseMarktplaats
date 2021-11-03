@@ -7,11 +7,18 @@ import lombok.NoArgsConstructor;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 
-@Entity @Builder @AllArgsConstructor @NoArgsConstructor
+@Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@NamedQuery(name = "Categorie.findAll", query = "SELECT i FROM Categorie i")
+public class Categorie extends AbstractEntity implements Identifiable<Integer> {
 
-@NamedQuery(name = "Categorie.findAll",
-        query = "SELECT i.naam FROM Categorie i"
-)
-public class Categorie extends AbstractEntity implements Identifiable<Integer>{
-    String naam;
+    private String naam;
+
+    @Override
+    public String toString() {
+        return this.naam;
+    }
 }
+

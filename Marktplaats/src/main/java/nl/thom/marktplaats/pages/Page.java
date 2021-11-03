@@ -9,7 +9,6 @@ public abstract class Page {
 
     public void render() {
         header();
-
     }
 
     public void header() {
@@ -34,18 +33,17 @@ public abstract class Page {
 
         for (Object item : items.subList(1, items.size())) {
             i++;
-            print("[" + (i == items.size() - 1 ? "x": i) + "] " + item);
+            print("[" + (i == items.size() - 1 ? "x" : i) + "] " + item);
         }
         print("");
     }
 
-    public static void renderMenuOptions(List items){
+    public static void renderMenuOptions(List items) {
         int i = 0;
         for (Object item : items) {
             i++;
             print("[" + i + "] " + item);
         }
-
     }
 
     public final static void clearConsole() {
@@ -53,5 +51,4 @@ public abstract class Page {
 //        System.out.flush();
 
     }
-
 }
