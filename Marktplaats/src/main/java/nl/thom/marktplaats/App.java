@@ -18,36 +18,37 @@ public class App {
     public static Gebruiker nullUser = Gebruiker.builder().build();
 
     @Inject
-    private CreateData create;
+    public CreateData create;
 
     @Inject
     private HomePage homePage;
 
-    private static final Scanner scanner;// = new Scanner(System.in);
-
     static {
 
         //JWT.awaitReady();
-        scanner = new Scanner(System.in);
-    }
-
-    public static String readLine() {
-        return scanner.nextLine();
+        Scanner scanner = new Scanner(System.in);
     }
 
     public static void main(String[] args) {
         Weld weld = new Weld();
         WeldContainer weldContainer = weld.initialize();
         App app = weldContainer.select(App.class).get();
-
         app.boot();
-
         weld.shutdown();
     }
 
     public void boot() {
         Util.scanner = new Scanner(System.in);
         currentUser = Gebruiker.builder().build(); //nullUser
+        create.create();
+
+        homePage.render();
+    }
+
+    public void bootMock() {
+        //Util.scanner = new Scanner(System.in);
+        //currentUser = Gebruiker.builder().build(); //nullUser
+        System.out.println("hoi"+ create);
         create.create();
 
         homePage.render();

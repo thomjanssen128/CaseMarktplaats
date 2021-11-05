@@ -18,5 +18,6 @@
         </Root>
         <!-- for everything from nl.thom.mp -->
         <Logger name="nl.thom.marktplaats" level="DEBUG"/>
+<!--        <Logger name="org.hibernate" level="ERROR"/>-->
     </Loggers>
 </Configuration>

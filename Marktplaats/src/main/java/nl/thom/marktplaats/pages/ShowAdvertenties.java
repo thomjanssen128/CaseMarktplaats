@@ -14,6 +14,8 @@ public class ShowAdvertenties extends Page {
     @Inject
     GebruikerDao userDao;
 
+
+
     public void render() {
         header();
         List<Advertentie> ads = userDao.getAllAdsOfUserById(App.currentUser.getId());

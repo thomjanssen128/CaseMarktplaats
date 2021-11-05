@@ -34,7 +34,8 @@ public class InlogPage extends Page {
                     String name = prompt("Gebruikersnaam: ");
                     String password = prompt("Wachtwoord: ");
                     Gebruiker user = loginGebruiker.getUserByUsernameAndPassword(name, password);
-                    loginGebruiker.login(user);
+                    if (user.getUsername() != "" && user.getUsername() != null)
+                        loginGebruiker.login(user);
 
                 case "x":
                     return;

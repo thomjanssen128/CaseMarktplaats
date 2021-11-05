@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @NamedQuery(name = "Advertentie.findAll", query = "SELECT a FROM Advertentie a")
 @NamedQuery(name = "Advertentie.getAdsFromUserById", query = "SELECT a FROM Advertentie a WHERE a.owner.id = :id")
+@NamedQuery(name = "Advertentie.getAdByTitleAndPriceAndUserId", query = "SELECT a FROM Advertentie a WHERE a.owner.id = :id AND a.prijs = :price AND a.titel = :title")
 public class Advertentie extends AbstractEntity implements Identifiable<Integer> {
 
     @NotNull
@@ -32,10 +33,8 @@ public class Advertentie extends AbstractEntity implements Identifiable<Integer>
 
     @Override
     public String toString() {
-        return "Ad: "
-                + getId() + " "
+        return "Adv: "
                 + getTitel() + " "
-                + getCategorie() + " "
                 + Util.prijs(getPrijs());
     }
 

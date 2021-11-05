@@ -1,8 +1,6 @@
 package nl.thom.marktplaats.daos;
 
 import nl.thom.marktplaats.domain.Advertentie;
-import nl.thom.marktplaats.domain.Categorie;
-import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -18,10 +16,19 @@ public class AdvertentieDao extends Dao<Advertentie, Integer> {
     public AdvertentieDao(EntityManager em) {
         this.em = em;
     }
+
     public List<Advertentie> getAllAdsOfUserById(int id) {
         return em.createNamedQuery("Advertentie.getAdsFromUserById", Advertentie.class)
                 .setParameter("id", id)
                 .getResultList();
     }
 
+    public List<Advertentie> getAdByTitleAndPriceAndUserId(String title, Double price, int id) {
+        List<Advertentie> ads = em.createNamedQuery("Advertentie.getAdByTitleAndPriceAndUserId", Advertentie.class)
+                .setParameter("title", title)
+                .setParameter("price", price)
+                .setParameter("id", id)
+                .getResultList();
+        return ads;
+    }
 }

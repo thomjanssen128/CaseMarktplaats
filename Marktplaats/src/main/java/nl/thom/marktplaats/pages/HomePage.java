@@ -27,6 +27,7 @@ public class HomePage extends Page {
     @Inject
     private ShowAdvertenties showAdvertenties;
 
+
     private boolean running = true;
 
     List<String> options1 = Arrays.asList(

@@ -46,6 +46,16 @@ public abstract class Page {
         }
     }
 
+    public static void renderMenuOptionsWithCancel(List items) {
+        int i = 0;
+        for (Object item : items) {
+            i++;
+            print("[" + i + "] " + item);
+        }
+        print("[x] Cancel");
+    }
+
+
     public final static void clearConsole() {
 //        System.out.print("\033[H\033[2J");
 //        System.out.flush();

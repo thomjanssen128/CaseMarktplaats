@@ -15,8 +15,35 @@ public class Util {
         System.out.println(s);
     }
 
+    public static final String END = "\033[0m";
+    public static final String YEL = "\033[93m";
+
+    public static void printR(String s) { System.out.println("\033[02m" + s + END); }
+
+    public static void printG(String s) {
+        System.out.println("\033[32m" + s + END);
+    }
+
+    public static void printY(String s) {
+        System.out.println(YEL + s + END);
+    }
+
+    public static void printB(String s) {
+        System.out.println("\033[34m" + s + END);
+    }
+
+    public static void printM(String s) {
+        System.out.println("\033[35m" + s + END);
+    }
+
+    public static void printC(String s) {
+        System.out.println("\033[36m" + s + END);
+    }
+
+
+
     public static String prompt(String message) {
-        print(message);
+        System.out.print(message);
         return scanner.nextLine();
     }
 

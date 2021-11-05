@@ -17,6 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import static nl.thom.marktplaats.util.Util.print;
+import static nl.thom.marktplaats.util.Util.printY;
 import static nl.thom.marktplaats.util.Util.prompt;
 
 public class RegistrationPage extends Page {
@@ -108,7 +109,7 @@ public class RegistrationPage extends Page {
             if (registrationService.emailIsUnique(email)) {
                 notUnique = false;
             } else {
-                System.out.println("\033[94mDit e-mailadres is al geregistreerd. Probeer opnieuw.\033[0m");
+                printY("Dit e-mailadres is al geregistreerd. Probeer opnieuw.");
             }
         }
         return email;

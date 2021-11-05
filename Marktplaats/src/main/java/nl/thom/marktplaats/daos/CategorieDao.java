@@ -8,7 +8,6 @@ import java.util.List;
 public class CategorieDao extends Dao<Categorie, Integer> {
 
     public List<Categorie> findAll() {
-        TypedQuery<Categorie> query = em.createNamedQuery("Categorie.findAll", Categorie.class);
-        return query.getResultList();
+        return em.createNamedQuery("Categorie.findAll", Categorie.class).getResultList();
     }
 }
