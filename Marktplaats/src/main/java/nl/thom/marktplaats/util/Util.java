@@ -16,12 +16,17 @@ public class Util {
     }
 
     public static final String END = "\033[0m";
+    public static final String RED = "\033[91m";
+    public static final String GRN = "\033[92m";
     public static final String YEL = "\033[93m";
+    public static final String BLU = "\033[94m";
+    public static final String MAG = "\033[95m";
+    public static final String CYN = "\033[96m";
 
-    public static void printR(String s) { System.out.println("\033[02m" + s + END); }
+    public static void printR(String s) { System.out.println(RED + s + END); }
 
     public static void printG(String s) {
-        System.out.println("\033[32m" + s + END);
+        System.out.println(GRN + s + END);
     }
 
     public static void printY(String s) {
@@ -29,29 +34,29 @@ public class Util {
     }
 
     public static void printB(String s) {
-        System.out.println("\033[34m" + s + END);
+        System.out.println(BLU + s + END);
     }
 
     public static void printM(String s) {
-        System.out.println("\033[35m" + s + END);
+        System.out.println(MAG + s + END);
     }
 
     public static void printC(String s) {
-        System.out.println("\033[36m" + s + END);
+        System.out.println(CYN + s + END);
     }
 
 
 
     public static String prompt(String message) {
         System.out.print(message);
-        return scanner.nextLine();
+        return readLine();
     }
 
     public static String readLine() {
         String line = scanner.hasNextLine() ? scanner.nextLine() : "NO INPUT AVAILABLE";
         if (testmode) {
             print(line);
-            sleep(1000);
+            sleep(3000);
         }
         return line;
     }

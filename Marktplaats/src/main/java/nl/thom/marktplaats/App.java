@@ -23,11 +23,10 @@ public class App {
     @Inject
     private HomePage homePage;
 
-    static {
-
-        //JWT.awaitReady();
-        Scanner scanner = new Scanner(System.in);
-    }
+//    static {
+//        //JWT.awaitReady();
+//        Scanner scanner = new Scanner(System.in);
+//    }
 
     public static void main(String[] args) {
         Weld weld = new Weld();
@@ -40,15 +39,6 @@ public class App {
     public void boot() {
         Util.scanner = new Scanner(System.in);
         currentUser = Gebruiker.builder().build(); //nullUser
-        create.create();
-
-        homePage.render();
-    }
-
-    public void bootMock() {
-        //Util.scanner = new Scanner(System.in);
-        //currentUser = Gebruiker.builder().build(); //nullUser
-        System.out.println("hoi"+ create);
         create.create();
 
         homePage.render();
