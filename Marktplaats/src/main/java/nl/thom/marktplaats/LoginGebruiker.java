@@ -19,7 +19,6 @@ public class LoginGebruiker {
     GebruikerDao userDao;
 
     public void login(Gebruiker gebruiker) {
-        System.out.println(gebruiker);
         App.setCurrentUser(gebruiker);
     }
 

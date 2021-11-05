@@ -32,7 +32,7 @@ public class CreateData {
         addAds();
         ads.forEach(adDao::save);
 
-        App.setCurrentUser(gebruikers.get(1));
+        App.setCurrentUser(gebruikers.get(0));
     }
 
     private static void addGebruikers() {
