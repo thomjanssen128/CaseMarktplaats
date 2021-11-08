@@ -8,7 +8,8 @@ public class PasswordGenerator {
     int lengthPassword = 6;
     Random r = new Random();
 
-    public String generate() {
+    public String generate(boolean mock) {
+        if (mock) return "JnKm90";
         String password = "";
         for (int i = 0; i < lengthPassword; i++) {
             password += r.ints(minChar, maxChar)

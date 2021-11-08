@@ -1,7 +1,6 @@
 package nl.thom.marktplaats.pages;
 
 import nl.thom.marktplaats.App;
-import nl.thom.marktplaats.LoginGebruiker;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -19,14 +18,11 @@ public class HomePage extends Page {
     @Inject
     private InlogPage inlogPage;
     @Inject
-    private LoginGebruiker loginGebruiker;
-    @Inject
     private AddAdPage addAdPage;
     @Inject
     private DeleteAdPage delAdPage;
     @Inject
     private ShowAdvertenties showAdvertenties;
-
 
     private boolean running = true;
 
@@ -47,7 +43,6 @@ public class HomePage extends Page {
     @Override
     public void render() {
         while (running) {
-            clearConsole();
             header();
             String cn = App.getCurrentUser().getUsername();
             System.out.println(cn == null ? "" : "\033[94m" + cn + "\033[0m");
@@ -76,7 +71,6 @@ public class HomePage extends Page {
                     print("Tot ziens!");
                     running = false;
                     return;
-
                 default:
                     print(MAAKKEUZE);
                     break;

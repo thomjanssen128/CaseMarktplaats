@@ -24,7 +24,6 @@ public class InlogPage extends Page {
 
     @Override
     public void render() {
-        clearConsole();
         header();
         print("");
         renderMenu(options);
@@ -47,7 +46,4 @@ public class InlogPage extends Page {
         }
     }
 
-    public void renderPage() {
-        render();
-    }
 }

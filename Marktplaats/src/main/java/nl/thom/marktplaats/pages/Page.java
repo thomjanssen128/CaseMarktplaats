@@ -2,10 +2,13 @@ package nl.thom.marktplaats.pages;
 
 import java.util.List;
 
+import static nl.thom.marktplaats.util.Util.END;
+import static nl.thom.marktplaats.util.Util.MAG;
 import static nl.thom.marktplaats.util.Util.print;
 
 public abstract class Page {
     public final String MAAKKEUZE = "Maak een keuze: ";
+    private static final String MENUKLEUR = "";
 
     public void render() {
         header();
@@ -14,11 +17,11 @@ public abstract class Page {
     public void header() {
         String name = getClass().getSimpleName();
         int length = (40 - name.length()) / 2;
-        var line = "\033[95m";
+        var line = MAG;
         line += "* ".repeat(length / 2);
         line += name + " ";
         line += "* ".repeat(length / 2);
-        line += "\033[0m";
+        line += END;
         print(line);
     }
 
@@ -33,7 +36,7 @@ public abstract class Page {
 
         for (Object item : items.subList(1, items.size())) {
             i++;
-            print("[" + (i == items.size() - 1 ? "x" : i) + "] " + item);
+            print(MENUKLEUR + "[" + (i == items.size() - 1 ? "x" : i) + "] " + END + item);
         }
         print("");
     }
@@ -42,7 +45,7 @@ public abstract class Page {
         int i = 0;
         for (Object item : items) {
             i++;
-            print("[" + i + "] " + item);
+            print(MENUKLEUR + "[" + i + "] " + END + item);
         }
     }
 
@@ -50,15 +53,8 @@ public abstract class Page {
         int i = 0;
         for (Object item : items) {
             i++;
-            print("[" + i + "] " + item);
+            print(MENUKLEUR + "[" + i + "] " + END + item);
         }
-        print("[x] Cancel");
-    }
-
-
-    public final static void clearConsole() {
-//        System.out.print("\033[H\033[2J");
-//        System.out.flush();
-
+        print(MENUKLEUR + "[x]" + END + " Annuleer");
     }
 }

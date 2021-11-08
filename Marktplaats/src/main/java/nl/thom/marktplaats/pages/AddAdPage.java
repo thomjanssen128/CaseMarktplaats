@@ -32,7 +32,6 @@ public class AddAdPage extends Page {
     @Override
     public void render() {
         this.categorien = catDao.findAll(); // eenmaal uit DB halen, daarna vaker gebruiken
-        clearConsole();
         header();
         System.out.println();
         renderMenu(options);
@@ -62,7 +61,7 @@ public class AddAdPage extends Page {
         antwoorden = antwoorden();
         List<String> catsMenu = new ArrayList<>();
         renderMenuOptions(categorien);
-        String catKeuze = prompt("");
+        String catKeuze = prompt("Welke categorie? ");
         antwoorden.put("categorie", catKeuze);
     }
 

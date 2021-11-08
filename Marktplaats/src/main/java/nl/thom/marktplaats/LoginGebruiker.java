@@ -26,7 +26,7 @@ public class LoginGebruiker {
         Gebruiker user = userDao.getUserByUsernameAndPassword(username, password);
         if (user.getUsername().length() == 0) {
             //log.warn("Username and/or password are unknown.");
-            printY("Username and/or password are unknown.");
+            printY("Gebruiksnaam en/of wachtwoord is onbekend.");
         }
         return user;
 

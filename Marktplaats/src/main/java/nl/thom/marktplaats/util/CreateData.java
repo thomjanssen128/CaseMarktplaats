@@ -32,7 +32,7 @@ public class CreateData {
         addAds();
         ads.forEach(adDao::save);
 
-        App.setCurrentUser(gebruikers.get(0));
+        //App.setCurrentUser(gebruikers.get(0));
     }
 
     private static void addGebruikers() {
@@ -49,19 +49,19 @@ public class CreateData {
     }
 
     private static void addCats() {
-        List<String> cats = List.of("Dieren", "Meubels", "It-Spullen", "Kinderen");
+        List<String> cats = List.of("Dieren", "Meubels", "It-Spullen", "Seizoensartikelen", "Anders");
         cats.stream()
                 .map(c -> Categorie.builder().naam(c).build())
                 .forEach(c -> categories.add(c));
     }
 
     private static void addAds() {
-        ads.add((Advertentie.builder().titel("Stoel").prijs(23.50d).categorie(categories.get(2)).owner(gebruikers.get(1)).build()));
+        ads.add((Advertentie.builder().titel("Stoel").prijs(23.50d).categorie(categories.get(1)).owner(gebruikers.get(0)).build()));
         ads.add((Advertentie.builder().titel("Jaapie").prijs(0d).categorie(categories.get(0)).owner(gebruikers.get(0)).build()));
-        ads.add((Advertentie.builder().titel("Poes").prijs(120d).categorie(categories.get(1)).owner(gebruikers.get(3)).build()));
-        ads.add((Advertentie.builder().titel("NES").prijs(1234567).categorie(categories.get(3)).owner(gebruikers.get(2)).build()));
-        ads.add((Advertentie.builder().titel("Muis").prijs(12d).categorie(categories.get(3)).owner(gebruikers.get(1)).build()));
-        ads.add((Advertentie.builder().titel("OCP-boek").prijs(80d).categorie(categories.get(2)).owner(gebruikers.get(3)).build()));
-        ads.add((Advertentie.builder().titel("Gedicht").prijs(1.25d).categorie(categories.get(2)).owner(gebruikers.get(1)).build()));
+        ads.add((Advertentie.builder().titel("Poes").prijs(120d).categorie(categories.get(0)).owner(gebruikers.get(3)).build()));
+        ads.add((Advertentie.builder().titel("NES").prijs(1234567).categorie(categories.get(4)).owner(gebruikers.get(2)).build()));
+        ads.add((Advertentie.builder().titel("Muis").prijs(12d).categorie(categories.get(2)).owner(gebruikers.get(0)).build()));
+        ads.add((Advertentie.builder().titel("OCP-boek").prijs(80d).categorie(categories.get(2)).owner(gebruikers.get(0)).build()));
+        ads.add((Advertentie.builder().titel("Gedicht").prijs(1.25d).categorie(categories.get(4)).owner(gebruikers.get(1)).build()));
     }
 }

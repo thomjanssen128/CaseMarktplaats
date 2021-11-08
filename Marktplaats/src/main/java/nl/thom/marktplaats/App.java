@@ -1,9 +1,11 @@
 package nl.thom.marktplaats;
 
+import com.github.christianspruijt.jwt.JWT;
 import nl.thom.marktplaats.domain.Gebruiker;
 import nl.thom.marktplaats.pages.HomePage;
 import nl.thom.marktplaats.util.CreateData;
 import nl.thom.marktplaats.util.Util;
+
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 
@@ -23,10 +25,11 @@ public class App {
     @Inject
     private HomePage homePage;
 
-//    static {
-//        //JWT.awaitReady();
-//        Scanner scanner = new Scanner(System.in);
-//    }
+    static {
+//        JWT.init();
+        Scanner scanner = new Scanner(System.in);
+        //Scanner scannerSpace = new Scanner(System.in);
+    }
 
     public static void main(String[] args) {
         Weld weld = new Weld();

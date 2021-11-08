@@ -9,15 +9,29 @@
         <Console name="console" target="SYSTEM_OUT">
             <PatternLayout disableAnsi="false" pattern="${logpattern}"/>
         </Console>
+
+        <!-- append is false for test purposes so the logfiles are automatically overwritten. Don't use this on production. -->
+        <RollingFile name="rollingFile" append="false" fileName="logs/marktplaats.log"
+                     filePattern="logs/marktplaats-%d{yyyy-MM-dd}.%i.log">
+            <PatternLayout pattern="${logpattern}"/>
+            <Policies>
+                <!-- Rolling once a day -->
+                <TimeBasedTriggeringPolicy interval="1" modulate="true"/>
+                <!-- Rolling based on size -->
+                <SizeBasedTriggeringPolicy size="2 MB"/>
+            </Policies>
+        </RollingFile>
     </Appenders>
 
     <Loggers>
         <!-- default -->
-        <Root level="INFO">
-            <AppenderRef ref="console"/>
+        <Root level="WARN">
+<!--            <AppenderRef ref="console"/>-->
+            <AppenderRef ref="rollingFile"/>
+
         </Root>
         <!-- for everything from nl.thom.mp -->
         <Logger name="nl.thom.marktplaats" level="DEBUG"/>
-<!--        <Logger name="org.hibernate" level="ERROR"/>-->
+        <!--        <Logger name="org.hibernate" level="ERROR"/>-->
     </Loggers>
 </Configuration>

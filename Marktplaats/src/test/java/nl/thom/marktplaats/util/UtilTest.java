@@ -9,11 +9,11 @@ class UtilTest {
     @Test
     public void colourfulText() {
         printR("Rood");
-        printY("Geel");
-        printB("Blauw");
-        printM("Magenta");
-        printC("Cyan");
         printG("Groen");
+        printB("Blauw");
+        printC("Cyan");
+        printM("Magenta");
+        printY("Geel");
 
     }
 
