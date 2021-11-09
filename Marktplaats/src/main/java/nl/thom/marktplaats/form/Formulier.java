@@ -7,7 +7,7 @@ import java.util.Map;
 import static nl.thom.marktplaats.util.Util.prompt;
 
 public class Formulier {
-    Map<String, String> antwoorden = new HashMap<>();
+    private Map<String, String> antwoorden = new HashMap<>();
 
     public void askForm(Collection<String> form) {
         for (String s : form) {

@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import java.util.*;
 
 import static nl.thom.marktplaats.App.currentUser;
+import static nl.thom.marktplaats.util.Util.print;
 import static nl.thom.marktplaats.util.Util.prompt;
 
 public class AddAdPage extends Page {
@@ -33,7 +34,7 @@ public class AddAdPage extends Page {
     public void render() {
         this.categorien = catDao.findAll(); // eenmaal uit DB halen, daarna vaker gebruiken
         header();
-        System.out.println();
+        print("");
         renderMenu(options);
         try {
             switch (prompt(MAAKKEUZE)) {
@@ -46,7 +47,7 @@ public class AddAdPage extends Page {
                     break;
             }
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            print(e.getMessage());
         }
     }
 

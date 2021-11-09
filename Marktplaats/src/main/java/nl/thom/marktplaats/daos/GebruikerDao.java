@@ -9,7 +9,6 @@ import javax.inject.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import java.util.List;
-import java.util.Optional;
 
 @Singleton
 public class GebruikerDao extends Dao<Gebruiker, Integer> {

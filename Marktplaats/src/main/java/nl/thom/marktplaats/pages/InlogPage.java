@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-import java.util.Arrays;
 import java.util.List;
 
 import static nl.thom.marktplaats.util.Util.print;
@@ -20,7 +19,7 @@ public class InlogPage extends Page {
     @Inject
     private LoginGebruiker loginGebruiker;
 
-    static List<String> options = Arrays.asList("Wil je inloggen?", "Ja", "Nee");
+    static List<String> options = List.of("Wil je inloggen?", "Ja", "Nee");
 
     @Override
     public void render() {
@@ -33,7 +32,7 @@ public class InlogPage extends Page {
                     String name = prompt("Gebruikersnaam: ");
                     String password = prompt("Wachtwoord: ");
                     Gebruiker user = loginGebruiker.getUserByUsernameAndPassword(name, password);
-                    if (user.getUsername() != "" && user.getUsername() != null)
+                    if (!user.getUsername().equals("") && user.getUsername() != null)
                         loginGebruiker.login(user);
 
                 case "x":
@@ -45,5 +44,4 @@ public class InlogPage extends Page {
             log.error(e.getMessage());
         }
     }
-
 }
