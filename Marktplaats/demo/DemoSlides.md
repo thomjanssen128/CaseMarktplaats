@@ -7,50 +7,62 @@ class:
 
 <style>
 
-html {
-  font-weight: 400;
-}
+  html {
+    font-weight: 400;
+  }
 
 section {
   background: #f78589;
   color:#163c40;
-  font-family:Consolas
-  
-}
-h1 {
+  font-family:"Consolas";
+  }
+
+  h1 {
     text-align: left;
     margin-left: 100px;
     font-size: 36px;
     max-width:650px;
     font-weight: 400;
   }
+  
   h2 {
     position: absolute;
     text-align: left;
     margin-left: 100px;
     top:200px;
-
     font-size: 36px;
     font-weight: 400;
     background-color:#163c40;
     color:#f78589;
-    
+    line-height:2em;
   }
+  
   h2::before {
-    content: " "
+    content: " ";
   }
+  
   h2::after{
-    content: " "
+    content: " ";
   }
-span {
-  color:white;
-}
+
+  span {
+    color: white;
+  }
+
+
+
+
+
 </style>
 
 ---
 
 Marktplaats <span>/ 
 / </span>Thom
+
+---
+## Registreren gebruiker<br> Advertentie toevoegen<br> Advertentie verwijderen<br> Mijn advertenties bekijken
+
 
 ---
 

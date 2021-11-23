@@ -4,7 +4,6 @@ import nl.thom.marktplaats.App;
 import nl.thom.marktplaats.daos.AdvertentieDao;
 import nl.thom.marktplaats.daos.GebruikerDao;
 import nl.thom.marktplaats.domain.Advertentie;
-import nl.thom.marktplaats.util.Util;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;

@@ -1,6 +1,5 @@
 package nl.thom.marktplaats.util;
 
-import nl.thom.marktplaats.App;
 import nl.thom.marktplaats.daos.AdvertentieDao;
 import nl.thom.marktplaats.daos.CategorieDao;
 import nl.thom.marktplaats.daos.GebruikerDao;

@@ -66,15 +66,6 @@ public class Util {
         return line;
     }
 
-    public static void sleep(int i) {
-        try {
-            Thread.sleep(i);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-            throw new RuntimeException(e);
-        }
-    }
-
     public static String prijs(Double s) {
         Currency EURO = java.util.Currency.getInstance("EUR");
         NumberFormat format = NumberFormat.getCurrencyInstance(Locale.US);

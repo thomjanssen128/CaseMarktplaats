@@ -1,34 +1,36 @@
 package nl.thom.marktplaats;
 
-import nl.thom.marktplaats.daos.GebruikerDao;
 import nl.thom.marktplaats.form.Formulier;
 import nl.thom.marktplaats.util.Bezorgwijze;
 import nl.thom.marktplaats.util.Util;
 
-import javax.persistence.EntityManager;
 import java.util.*;
 
 import static nl.thom.marktplaats.pages.Page.renderMenu;
 import static nl.thom.marktplaats.pages.Page.renderMenuOptions;
 import static nl.thom.marktplaats.pages.Page.renderMenuOptionsWithCancel;
-import static nl.thom.marktplaats.util.Util.print;
 import static nl.thom.marktplaats.util.Util.prompt;
 
 public class TechDemo {
 
-    private final List<String> items = List.of("Naam", "Leeftijd", "Gelukkig", "Nee");
+    private final List<String> items = List.of(
+            "Naam",
+            "Leeftijd",
+            "Gelukkig",
+            "Nee"
+    );
 
     public static void main(String[] args) {
         Util.scanner = new Scanner(System.in);
         TechDemo demo = new TechDemo();
 
-        demo.formDemo();
+        // demo.formDemo();
 
-//        demo.menuDemo();
-//        demo.menuOptionsDemo();
-//        demo.menuOptionsWithCancelDemo();
+        // demo.menuDemo();
+        // demo.menuOptionsDemo();
+        // demo.menuOptionsWithCancelDemo();
 
-//        demo.welkeBezorgwijzen();
+        demo.welkeBezorgwijzen();
     }
 
     private void formDemo() {
@@ -56,7 +58,7 @@ public class TechDemo {
         String a = prompt("Welke? ");
     }
 
-    private void welkeBezorgwijzen(){
+    private void welkeBezorgwijzen() {
         List b = Arrays.asList(Bezorgwijze.values());
         boolean aan;
         int mask;
@@ -66,13 +68,10 @@ public class TechDemo {
             for (int j = 0; j < 3; j++) {
                 aan = (i & mask) != 0;
 
-                System.out.println(i + " " + b.get(j)+ " " + aan);
+                System.out.println(i + " " + b.get(j) + " " + aan);
 
-                mask=mask<<1;
-
+                mask = mask << 1;
             }
-
         }
-
     }
 }
