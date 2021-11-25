@@ -2,11 +2,22 @@
     String s = "Hallo!";
 %>
 <html>
+<head>
+    <style>
+        body {background-color: #aa00aa;}
+        h2 {
+            font-family: 'Consolas',monospace;
+            color: deeppink;
+            font-size: 144px;
+            text-shadow: 3px 5px aliceblue;
+        }
+
+        h2:hover {
+        }
+
+    </style>
+</head>
 <body>
-<h2 style="
-        font-family: 'Consolas';
-        color: deeppink;
-        font-size: 72px;
-    "><%=s%></h2>
+<h2><%=s%></h2>
 </body>
 </html>
