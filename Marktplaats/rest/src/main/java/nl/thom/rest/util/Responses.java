@@ -4,9 +4,8 @@ import javax.ws.rs.BadRequestException;
 
 import static java.lang.String.format;
 
-public class Responses {
+public final class Responses {
     private Responses() {
-
     }
 
     public static Runnable throwBadRequest(Long id) {

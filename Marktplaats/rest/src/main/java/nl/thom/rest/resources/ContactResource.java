@@ -2,12 +2,12 @@ package nl.thom.rest.resources;
 
 import nl.thom.rest.dao.ContactDao;
 import nl.thom.rest.domain.Contact;
+import static nl.thom.rest.util.Responses.badRequest;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-import static nl.thom.rest.util.Responses.badRequest;
 
 public class ContactResource {
 
