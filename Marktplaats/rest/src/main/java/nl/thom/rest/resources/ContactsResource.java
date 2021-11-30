@@ -2,6 +2,8 @@ package nl.thom.rest.resources;
 
 import nl.thom.rest.dao.ContactDao;
 import nl.thom.rest.domain.Contact;
+import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
 import javax.inject.Inject;
 import javax.ws.rs.*;
@@ -20,7 +22,9 @@ public class ContactsResource {
 
     @GET
     @Produces(APPLICATION_JSON)
-    public List<Contact> getAll(@QueryParam("q") String q) {
+    @Operation(description = "Gets all contacts or filtered by q.")
+    public List<Contact> getAll(@Parameter(description = "Search on firstname and/or surname")
+                                @QueryParam("q") String q) {
         return contactDao.getContacts(q);
     }
 

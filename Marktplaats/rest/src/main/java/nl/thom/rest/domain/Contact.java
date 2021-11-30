@@ -24,3 +24,6 @@ public class Contact {
     private String surname;
     private String email;
 }
+
+
+

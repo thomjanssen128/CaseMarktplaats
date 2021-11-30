@@ -1,5 +1,5 @@
 <%
-    String s = "Hallo!";
+    String s = "Hallu!";
 %>
 <html>
 <head>
